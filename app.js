@@ -11,7 +11,8 @@ var payments = require('./routes/payments');
 var flavours = require('./routes/flavours');
 
 var clientend = require('./routes/clientend');
-var companyend = require('./routes/companyend')
+var companyend = require('./routes/companyend');
+var community = require('./routes/community');
 
 var app = express();
 
@@ -35,6 +36,8 @@ app.use('/flavours', flavours);
 
 app.use('/clientend',clientend);
 app.use('/companyend',companyend);
+
+app.use('/community',community);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
