@@ -1,19 +1,5 @@
 extends layout
 
 block content
-  table.table.table-striped.table-hover.table-bordered
-    thread
-      tr
-        th #
-        th Ref ID
-        th Mobile number
-        th.message-col Message
-        th Date
-    tbody
-      each feed, i in feedback
-        tr
-          td #{record_no++}
-          td #{i}
-          td #{feed.mobileNo}
-          td.message-col #{feed.message}
-          td #{feed.date}
+  div.container-fluid
+    p work
