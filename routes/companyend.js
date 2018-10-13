@@ -2,11 +2,21 @@ var express = require('express');
 var router = express.Router();
 var tapApi = require("tap-telco-api");
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
     res.render('companyend', { title: 'Dashboard'});
 })
 
+router.get('/dashboard',function (req,res) {
+    res.render('index')
+})
+
+router.get('/community',function (req,res) {
+    res.render('index')
+})
+
+router.get('/identify',function (req,res) {
+    res.render('index')
+})
 
 
 
