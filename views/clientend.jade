@@ -55,7 +55,17 @@ html
             gtag('js', new Date());
             gtag('config', 'UA-68457027-4');
     body
-        // Load Facebook SDK for JavaScript
+
+        div#add(style="position:fixed;top:10vh;left:10vw;width:80vw;height:80vh;background-color:rgba(1,1,1,0.7);z-index:10")
+            img(src='images/ads/tad.jpg' style="width:80vw;height:80vh;opacity: 0.8")
+
+        script.
+
+            setTimeout(hide,5000);
+
+            function hide() {
+                document.getElementById("add").style.display = "none";
+            }
         #fb-root
         script.
             (function(d, s, id) {
