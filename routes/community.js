@@ -56,6 +56,17 @@ router.post('/send',
 
 router.post('/subscription', function(req, res){
     console.log("Subscription notification " + req.body.subscriberId)
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("unique");
+        var query = { msg_to: "shehan" };
+        dbo.collection("msg_subscription").find(query).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            db.close();
+            res.render('community', { title: 'Community', "messages" : result, record_no : 1});
+        });
+    });
     res.send(tapApi.subscription.subscriptionNotificationResponse)
 });
 
