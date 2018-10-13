@@ -43,12 +43,22 @@ router.post('/send',
         next()
     },
     function(req, res){
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("unique");
+            var myobj = { msg_from: "tadhack", msg_to: "gihan", msg_body: req.body.messageInput, msg_date: new Date()};
+            dbo.collection("msg_table").insertOne(myobj, function(err, res) {
+                if (err) throw err;
+                console.log("1 msg inserted to all subscribers");
+                db.close();
+            });
+        });
+
         tapApi.sms.requestCreator({applicationId : "APP_000101", password : "password"}).broadcast(req.body.messageInput, function(mtReq){
             tapApi.transport.createRequest({hostname: '127.0.0.1', port: 7000, path: '/sms/send'}, mtReq, function(request){
                 tapApi.transport.httpClient(request, function() {
                     console.log("Mt request send to subscriber" + mtReq)
                     console.log(util.inspect(mtReq.destinationAddresses, {showHidden: false, depth: null}))
-
                 })
             })
         })}
@@ -56,17 +66,7 @@ router.post('/send',
 
 router.post('/subscription', function(req, res){
     console.log("Subscription notification " + req.body.subscriberId)
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("unique");
-        var query = { msg_to: "shehan" };
-        dbo.collection("msg_subscription").find(query).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            db.close();
-            res.render('community', { title: 'Community', "messages" : result, record_no : 1});
-        });
-    });
+
     res.send(tapApi.subscription.subscriptionNotificationResponse)
 });
 
