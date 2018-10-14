@@ -5,6 +5,9 @@ var yeast = require('yeast');
 var express = require('express');
 var router = express.Router();
 var tapApi = require("tap-telco-api");
+var app = express();
+
+var session = require('express-session');
 
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
@@ -24,6 +27,13 @@ router.post('/login',function (req,res) {
         dbo.collection("users_table").find(query).toArray(function(err, result) {
             if (err) throw err;
             console.log(result[0].user_type);
+            app.use(session({
+                secret: req.body.user ,
+                email:req.body.password,
+                resave: false,
+                saveUnitialized : true
+            }));
+            console.log(session.email);
             if(result[0].user_type == 'company'){
                 res.render('companyend');
             }else{
