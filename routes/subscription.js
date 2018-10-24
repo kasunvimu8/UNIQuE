@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("unique");
-        var query = { subscription_company: "tadhack" };
+        var query = { subscription_company: "tadHack@dialog.lk" };
         dbo.collection("subscription_table").find(query).toArray(function(err, result) {
             if (err) throw err;
             console.log(result);
