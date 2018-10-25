@@ -54,8 +54,54 @@ html
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'UA-68457027-4');
-    body
-        // Load Facebook SDK for JavaScript
+
+        style.
+            .avatar {
+                vertical-align: middle;
+                /*width: 50px;
+                height: 50px;*/
+                border-radius: 50%;
+            }
+
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                max-width: 200px;
+                margin: auto;
+                text-align: center;
+                font-family: arial;
+            }
+
+            input[type=submit] {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+            }
+
+            input[type=submit]:hover {
+                opacity: 0.8;
+            }
+
+            .sub-head {
+                color: #0f0f0f;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding-bottom: 25px;
+            }
+
+
+
+body
+
+        div#add(style="position:fixed;top:0vh;left:0vw;height:100vh;width:100vw;background-color:rgba(1,1,1,0.7);z-index:10")
+            img(src='images/ads/tad.png' style="position:fixed;left:20vw;top:20vh;width:60vw;opacity:1")
+
+        script.
+
+            setTimeout(hide,5000);
+
+            function hide() {
+                document.getElementById("add").style.display = "none";
+            }
         #fb-root
         script.
             (function(d, s, id) {
@@ -117,9 +163,9 @@ html
                     li
                         a.waves-effect.waves-light(data-scroll-nav='1', href='#') Home
                     li
-                        a.waves-effect.waves-light(data-scroll-nav='2', href='#') About
+                        a.waves-effect.waves-light(data-scroll-nav='2', href='#') Subscribe
                     li
-                        a.waves-effect.waves-light(data-scroll-nav='3', href='#') Subscribe
+                        a.waves-effect.waves-light(data-scroll-nav='3', href='#') About
         // End Nav Section
         // Start Header Section
         header#main-header(data-scroll-index='1')
@@ -129,21 +175,21 @@ html
                         .col-sm-6.col-md-4
                             .thumbnail
                                 a.lightbox(href='clientend/tadhack/', target='_blanck;')
-                                    img(src='images/1.png', alt='Traffic')
+                                    img(src='images/0.png', alt='Traffic')
                                 .caption
-                                    h3(style='text-align: center;') company A
+                                    h3(style='text-align: center;') TADHack
                         .col-sm-6.col-md-4
                             .thumbnail
                                 a.lightbox(href='trails/ohiya/index1.html', target='_blanck')
-                                    img(src='images/1.png', alt='Traffic')
+                                    img(src='images/2.jpg', alt='Traffic')
                                 .caption
-                                    h3(style='text-align: center;') company A
+                                    h3(style='text-align: center;') Dialog
                         .col-sm-6.col-md-4
                             .thumbnail
                                 a.lightbox(href='trails/ohiya/index2.html', target='_black')
-                                    img(src='images/1.png', alt='Traffic')
+                                    img(src='images/3.jpg', alt='Traffic')
                                 .caption
-                                    h3(style='text-align: center;') company A
+                                    h3(style='text-align: center;') HsenidMobile
                         .col-sm-6.col-md-4
                             .thumbnail
                                 a.lightbox(href='trails/ohiya/index3.html', target='_blanck')
@@ -155,17 +201,16 @@ html
                                 a.lightbox(href='trails/yahangala/index.html')
                                     img(src='images/1.png', alt='Bridge')
                                 .caption
-                                    h3(style='text-align: center;') company A
+                                    h3(style='text-align: center;') company B
                         .col-sm-6.col-md-4
                             .thumbnail
                                 a.lightbox(href='trails/kallebokka/index.html')
                                     img(src='images/1.png', alt='Tunnel')
                                 .caption
-                                    h3(style='text-align: center;') company A
+                                    h3(style='text-align: center;') company C
         // End Header Section
         // Start About Section
-        section#about-us(data-scroll-index='2')
-            .main-section.center-align.white-text.gradientBackground(style='padding-bottom: 40px')
+
         // End About Section
         //
           Start Timeline Section
@@ -226,6 +271,25 @@ html
           </section>
           End Timeline Section
         // Start Copy Rights Section
+
+        section#Subscribe(data-scroll-index='2').main-section.center-align.white-text(style="background-color: aliceblue")
+
+            div
+                h2
+                    .sub-head Subscriptions
+
+            div.subs.container-fluid
+
+                each user in messages
+                    .card.col-sm-3(style="float:left;margin:10px")
+                        img.avatar(src='images/img_avatar.png', alt='Avatar' style='width:100%')
+                        p.title #{user.user_name}
+                        input(type='submit', value='Subscribe')
+
+
+        section#About(data-scroll-index='3')
+            .main-section.center-align.white-text.gradientBackground(style='padding-bottom: 40px')
+
         #copy-rights.col.s12(style='background-color:#170416;')
             .container(style='padding: 0px')
                 p
@@ -235,6 +299,8 @@ html
         // Start Modals Section
         // End Modals Section
         // Clock Template
+
+
         script#clock-template(type='text/template').
             <div class="time <%= label %>">
             <span class="count curr top"><%= curr %></span>
