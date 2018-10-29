@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("heroku_whwz6n3v");
-        var query = { msg_to: "shehan" };
+        var query = { msg_to: "tadhack" };
         dbo.collection("msg_table").find(query).toArray(function(err, result) {
             if (err) throw err;
             console.log(result);
