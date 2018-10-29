@@ -47,6 +47,7 @@ router.post('/send',
             if (err) throw err;
             var dbo = db.db("heroku_whwz6n3v");
             var myobj = { msg_from: "tadhack", msg_to: "gihan", msg_body: req.body.messageInput, msg_date: new Date()};
+            console.log(req.body.messageInput);
             dbo.collection("msg_table").insertOne(myobj, function(err, res) {
                 if (err) throw err;
                 console.log("1 msg inserted to all subscribers");
