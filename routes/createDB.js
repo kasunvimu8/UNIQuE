@@ -3,14 +3,14 @@ var router = express.Router();
 var tapApi = require("tap-telco-api")
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = process.env.MONGODB_URI || "mongodb://localhost:27017/";
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
-    MongoClient.connect(process.env.MONGODB_URI || url, function(err, db) {
+    MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("unique");
+        var dbo = db.db("heroku_whwz6n3v");
         // dbo.createCollection("users_table", function(err, res) {
         //     if (err) throw err;
         //     db.close();
