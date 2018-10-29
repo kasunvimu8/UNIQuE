@@ -62,8 +62,8 @@ router.post('/send',
         //             console.log(util.inspect(mtReq.destinationAddresses, {showHidden: false, depth: null}))
         //         })
         //     })
-        // }
-        )}
+        // })
+    }
 );
 
 router.post('/subscription', function(req, res){
