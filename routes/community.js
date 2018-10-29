@@ -7,7 +7,7 @@ var router = express.Router();
 var tapApi = require("tap-telco-api");
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = process.env.MONGODB_URI || "mongodb://localhost:27017/";
 
 var feedbackManager = require('./../backend_manager').feedbackRepo;
 
@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("unique");
+        var dbo = db.db("heroku_whwz6n3v");
         var query = { msg_to: "shehan" };
         dbo.collection("msg_table").find(query).toArray(function(err, result) {
             if (err) throw err;
@@ -45,7 +45,7 @@ router.post('/send',
     function(req, res){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            var dbo = db.db("unique");
+            var dbo = db.db("heroku_whwz6n3v");
             var myobj = { msg_from: "tadhack", msg_to: "gihan", msg_body: req.body.messageInput, msg_date: new Date()};
             dbo.collection("msg_table").insertOne(myobj, function(err, res) {
                 if (err) throw err;
@@ -79,7 +79,7 @@ router.post('/sms',
     function(req, res, next){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            var dbo = db.db("unique");
+            var dbo = db.db("heroku_whwz6n3v");
             var myobj = { msg_from: req.body.sourceAddress, msg_to: "shehan", msg_body: req.body.message, msg_date: new Date()};
             dbo.collection("msg_table").insertOne(myobj, function(err, res) {
                 if (err) throw err;

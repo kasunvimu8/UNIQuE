@@ -10,7 +10,7 @@ var app = express();
 var session = require('express-session');
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = process.env.MONGODB_URI || "mongodb://localhost:27017/";
 
 router.get('/',function (req,res) {
     res.render('index')
@@ -22,7 +22,7 @@ router.post('/login',function (req,res) {
     //res.render('index')
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("unique");
+        var dbo = db.db("heroku_whwz6n3v");
         var query = {user_email: req.body.user , user_Password: req.body.password };
         dbo.collection("users_table").find(query).toArray(function(err, result) {
             if (err) throw err;
