@@ -55,14 +55,15 @@ router.post('/send',
             });
         });
 
-        tapApi.sms.requestCreator({applicationId : "APP_000101", password : "password"}).broadcast(req.body.messageInput, function(mtReq){
-            tapApi.transport.createRequest({hostname: '127.0.0.1', port: 7000, path: '/sms/send'}, mtReq, function(request){
-                tapApi.transport.httpClient(request, function() {
-                    console.log("Mt request send to subscriber" + mtReq)
-                    console.log(util.inspect(mtReq.destinationAddresses, {showHidden: false, depth: null}))
-                })
-            })
-        })}
+        // tapApi.sms.requestCreator({applicationId : "APP_000101", password : "password"}).broadcast(req.body.messageInput, function(mtReq){
+        //     tapApi.transport.createRequest({hostname: '127.0.0.1', port: 7000, path: '/sms/send'}, mtReq, function(request){
+        //         tapApi.transport.httpClient(request, function() {
+        //             console.log("Mt request send to subscriber" + mtReq)
+        //             console.log(util.inspect(mtReq.destinationAddresses, {showHidden: false, depth: null}))
+        //         })
+        //     })
+        // }
+        )}
 );
 
 router.post('/subscription', function(req, res){
