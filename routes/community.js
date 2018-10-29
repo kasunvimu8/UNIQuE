@@ -96,7 +96,7 @@ router.post('/sms',
     },
     function(req, res){
         tapApi.sms.requestCreator({applicationId : "APP_000101", password : "password"}).single(req.body.sourceAddress, "Thanks for your feedback.", function(mtReq){
-            tapApi.transport.createRequest({hostname: '127.0.0.1', port: 7000, path: '/sms/send'}, mtReq, function(request){
+            tapApi.transport.createRequest({hostname: 'cryptic-garden-37337.herokuapp.com', port: 7000, path: '/sms/send'}, mtReq, function(request){
                 tapApi.transport.httpClient(request, function() {
                     console.log("Mt request send to subscriber" + mtReq)
                 })
