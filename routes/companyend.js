@@ -5,8 +5,8 @@ var tapApi = require("tap-telco-api");
 var session = require('express-session');
 
 router.get('/', function(req, res, next) {
-    var sess = req.session;
-    console.log(sess.email);
+    //var sess = req.session;
+    //console.log(sess.email);
     res.render('companyend', { title: 'Dashboard'});
 })
 
