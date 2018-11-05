@@ -42,10 +42,10 @@ block content
                     canvas.width = video.videoWidth;
                     canvas.height = video.videoHeight;
                     canvas.getContext('2d').drawImage(video, 0, 0);
-                    // Other browsers will fall back to image/png
+
                     img.src = canvas.toDataURL('image/jpeg');
                     var contents = img.src.split(',')[1];
-                   // alert(contents);
+
                     var xhr = new XMLHttpRequest();
 
                     xhr.open("POST", "http://localhost:3000/identify/qr", true);
@@ -54,9 +54,6 @@ block content
                         value: contents
                     }));
 
-                    //localStorage.setItem("qr", img);
-                    //window.location.href = 'identify/qr?im='+contents;
-                    //alert("save image");
                 };
 
                 function handleSuccess(stream) {
