@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("unique");
+        var dbo = db.db("heroku_whwz6n3v");
         // dbo.createCollection("users_table", function(err, res) {
         //     if (err) throw err;
         //     db.close();

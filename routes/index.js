@@ -22,7 +22,7 @@ router.post('/login',function (req,res) {
     //res.render('index')
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("heroku_whwz6n3v" || "unique");
+        var dbo = db.db("heroku_whwz6n3v");
         var query = {user_email: req.body.user , user_Password: req.body.password };
         dbo.collection("users_table").find(query).toArray(function(err, result) {
             if (err) throw err;

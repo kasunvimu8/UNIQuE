@@ -13,7 +13,7 @@ var url = process.env.MONGODB_URI || "mongodb://localhost:27017/";
 router.get('/', function(req, res, next) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("unique");
+        var dbo = db.db("heroku_whwz6n3v");
         var query = { subscription_company: "tadHack@dialog.lk" };
         dbo.collection("subscription_table").find(query).toArray(function(err, result) {
             if (err) throw err;

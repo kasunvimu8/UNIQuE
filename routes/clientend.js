@@ -11,7 +11,7 @@ var url = process.env.MONGODB_URI || "mongodb://localhost:27017/";
 router.get('/', function(req, res, next) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("heroku_whwz6n3v" || "unique");
+        var dbo = db.db("heroku_whwz6n3v");
         var query = { user_type: "company" };
         dbo.collection("users_table").find(query).toArray(function(err, result) {
             if (err) throw err;
@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 router.get('/tadhack', function(req, res, next) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("heroku_whwz6n3v" || "unique");
+        var dbo = db.db("heroku_whwz6n3v");
         var query = {msg_from: "tadhack" , msg_to: "gihan" };
         dbo.collection("msg_table").find(query).toArray(function(err, result) {
             if (err) throw err;
