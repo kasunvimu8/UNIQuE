@@ -22,7 +22,11 @@ router.get('/', function(req, res, next) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("heroku_whwz6n3v");
-        var query = { msg_to: "shehan" };
+
+        //var query = { msg_to: "shehan" };
+
+        var query = { msg_to: "tadhack" };
+
         dbo.collection("msg_table").find(query).toArray(function(err, result) {
             if (err) throw err;
             console.log(result);
@@ -47,6 +51,7 @@ router.post('/send',
             if (err) throw err;
             var dbo = db.db("heroku_whwz6n3v");
             var myobj = { msg_from: "tadhack", msg_to: "gihan", msg_body: req.body.messageInput, msg_date: new Date()};
+            console.log(req.body.messageInput);
             dbo.collection("msg_table").insertOne(myobj, function(err, res) {
                 if (err) throw err;
                 console.log("1 msg inserted to all subscribers");
@@ -54,14 +59,16 @@ router.post('/send',
             });
         });
 
+        /* Hidden for heroku SMS sending API */
         tapApi.sms.requestCreator({applicationId : "APP_000101", password : "password"}).broadcast(req.body.messageInput, function(mtReq){
-            tapApi.transport.createRequest({hostname: '127.0.0.1', port: 7000, path: '/sms/send'}, mtReq, function(request){
+            tapApi.transport.createRequest({hostname: 'cryptic-garden-37337.herokuapp.com', port: 7000, path: '/sms/send'}, mtReq, function(request){
                 tapApi.transport.httpClient(request, function() {
                     console.log("Mt request send to subscriber" + mtReq)
                     console.log(util.inspect(mtReq.destinationAddresses, {showHidden: false, depth: null}))
                 })
             })
-        })}
+        })
+    }
 );
 
 router.post('/subscription', function(req, res){
@@ -79,7 +86,7 @@ router.post('/sms',
     function(req, res, next){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            var dbo = db.db("unique");
+            var dbo = db.db("heroku_whwz6n3v");
             var myobj = { msg_from: req.body.sourceAddress, msg_to: "shehan", msg_body: req.body.message, msg_date: new Date()};
             dbo.collection("msg_table").insertOne(myobj, function(err, res) {
                 if (err) throw err;
@@ -93,7 +100,7 @@ router.post('/sms',
     },
     function(req, res){
         tapApi.sms.requestCreator({applicationId : "APP_000101", password : "password"}).single(req.body.sourceAddress, "Thanks for your feedback.", function(mtReq){
-            tapApi.transport.createRequest({hostname: '127.0.0.1', port: 7000, path: '/sms/send'}, mtReq, function(request){
+            tapApi.transport.createRequest({hostname: 'cryptic-garden-37337.herokuapp.com', port: 7000, path: '/sms/send'}, mtReq, function(request){
                 tapApi.transport.httpClient(request, function() {
                     console.log("Mt request send to subscriber" + mtReq)
                 })
