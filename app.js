@@ -18,6 +18,8 @@ var createDB = require('./routes/createDB');
 var subscription = require('./routes/subscription');
 var identify = require('./routes/identify');
 
+var test = require('./routes/test');
+
 var app = express();
 
 // view engine setup
@@ -45,6 +47,8 @@ app.use('/community',community);
 app.use('/createDB',createDB);
 app.use('/subscription',subscription);
 app.use('/identify',identify);
+
+app.use('/test',test);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

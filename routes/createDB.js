@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var tapApi = require("tap-telco-api")
+var tapApi = require("tap-telco-api");
 
 var MongoClient = require('mongodb').MongoClient;
 var url = process.env.MONGODB_URI || "mongodb://localhost:27017/";
