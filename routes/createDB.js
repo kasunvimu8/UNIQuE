@@ -31,6 +31,10 @@ router.get('/', function(req, res, next) {
             if (err) throw err;
             db.close();
         });
+        dbo.createCollection("qr_table", function(err, res) {
+            if (err) throw err;
+            db.close();
+        });
 
         //adding data
         var myobj = [
@@ -64,6 +68,15 @@ router.get('/', function(req, res, next) {
             {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "Prabath"}
         ]
         dbo.collection("subscription_table").insertMany(myobj3, function(err, res) {
+            if (err) throw err;
+            console.log("Number of documents inserted: " + res.insertedCount);
+            db.close();
+        });
+
+        var myobj4 = [
+            {"user_email" : "tadHack@dialog.lk", "pwd" : "123456" }
+        ]
+        dbo.collection("qr_table").insertMany(myobj4, function(err, res) {
             if (err) throw err;
             console.log("Number of documents inserted: " + res.insertedCount);
             db.close();
