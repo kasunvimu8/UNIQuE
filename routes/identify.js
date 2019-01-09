@@ -69,17 +69,19 @@ router.post('/qr',function (req,res) {
                     MongoClient.connect(url, function(err, db) {
                         if (err) throw err;
                         var dbo = db.db("unique");
-                        var query = { user_email: res[1]}
+                        var query = { user_email: res[1] , pwd: res[0].toString()}
                         dbo.collection("qr_table").find(query).toArray(function(err, result) {
                             if (err) throw err;
                             console.log(result);
                             db.close();
                             if(empty(result)){
-                                JSAlert.alert("Wrong");
+                                //JSAlert.alert("Wrong");
                                 console.log("Wrong");
+                                res.render('identify',{al: "WRONG"});
                             }else{
                                 console.log("Correct");
-                                JSAlert.alert("Correct");
+                                //JSAlert.alert("Correct");
+                                res.render('identify',{al: "Correct"});
                             }
                         });
                     });
@@ -91,7 +93,8 @@ router.post('/qr',function (req,res) {
             qr.decode(image.bitmap);
         });
     });
-    res.render('identify');
+    console.log("Test");
+    res.render('identify',{al: "Correct"});
 })
 
 router.get('/',function (req,res) {

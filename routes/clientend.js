@@ -53,7 +53,7 @@ router.get('/tadhack', function(req, res, next) {
         });
         var ran = rn(options);
         var insRan = [
-            {"user_email" : "tadHack@dialog.lk", "pwd" : ran }
+            {"user_email" : "tadHack@dialog.lk", "pwd" : ran.toString() }
         ];
         dbo.collection("qr_table").insertMany(insRan, function(err, res) {
             if (err) throw err;
