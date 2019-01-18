@@ -1,5 +1,7 @@
 var yeast = require('yeast');
 
+//npm install is-empty
+
 var express = require('express');
 var router = express.Router();
 var tapApi = require("tap-telco-api");
@@ -15,6 +17,14 @@ var fs = require('fs');
 var Jimp = require("jimp");
 var QrCode = require('qrcode-reader');
 //npm install --save jimp
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+var empty = require('is-empty');
+
+//npm install --save js-alert
+var JSAlert = require("js-alert");
 
 router.post('/fileupload',function (req,res) {
     //if (req.url == '/fileupload') {
@@ -53,13 +63,38 @@ router.post('/qr',function (req,res) {
                 }
                 if(value){
                     console.log(value.result);
+
+                    var res = value.result.split(" ");
+                    console.log(res[0]);
+                    MongoClient.connect(url, function(err, db) {
+                        if (err) throw err;
+                        var dbo = db.db("unique");
+                        var query = { user_email: res[1] , pwd: res[0].toString()}
+                        dbo.collection("qr_table").find(query).toArray(function(err, result) {
+                            if (err) throw err;
+                            console.log(result);
+                            db.close();
+                            if(empty(result)){
+                                //JSAlert.alert("Wrong");
+                                console.log("Wrong");
+                                res.render('identify',{al: "WRONG"});
+                            }else{
+                                console.log("Correct");
+                                //JSAlert.alert("Correct");
+                                res.render('identify',{al: "Correct"});
+                            }
+                        });
+                    });
                 }
                 console.log(value);
+
+
             };
             qr.decode(image.bitmap);
         });
     });
-    res.render('identify');
+    console.log("Test");
+    res.render('identify',{al: "Correct"});
 })
 
 router.get('/',function (req,res) {
@@ -69,6 +104,7 @@ router.get('/',function (req,res) {
         // res.write('<input type="submit">');
         // res.write('</form>');
         // return res.end();
+
     res.render('identify');
 })
 
