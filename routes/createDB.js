@@ -39,6 +39,7 @@ router.get('/', function(req, res, next) {
         //adding data
         var myobj = [
             { "msg_from" : "tadhack", "msg_to" : "gihan", "msg_body" : "promotion 1" },
+            { "msg_from" : "dialog", "msg_to" : "gihan", "msg_body" : "promotion 1" },
             { "msg_from" : "tadhack", "msg_to" : "gihan", "msg_body" : null, "msg_date" : "2018-10-13T16:43:39.989Z" },
             { "msg_from" : "tadhack", "msg_to" : "gihan", "msg_body" : null, "msg_date" : "2018-10-13T16:45:55.447Z" },
             { "msg_from" : "tadhack", "msg_to" : "gihan", "msg_body" : null, "msg_date" : "2018-10-13T16:50:08.034Z" },
@@ -65,6 +66,9 @@ router.get('/', function(req, res, next) {
 
         var myobj3 = [
             {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "shehan"},
+            {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "gihan"},
+            {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "geeth"},
+            {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "hassana"},
             {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "Prabath"}
         ]
         dbo.collection("subscription_table").insertMany(myobj3, function(err, res) {

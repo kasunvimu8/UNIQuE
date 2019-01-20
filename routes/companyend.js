@@ -6,7 +6,7 @@ var session = require('express-session');
 
 router.get('/', function(req, res, next) {
     var sess = req.session;
-    console.log(sess.email);
+   // console.log(sess.email);
     res.render('companyend', { title: 'Dashboard'});
 })
 

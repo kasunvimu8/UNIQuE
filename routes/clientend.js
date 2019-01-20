@@ -77,4 +77,20 @@ router.get('/tadhack', function(req, res, next) {
 
 })
 
+router.get('/dialog', function(req, res, next) {
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("unique");
+        var query = {msg_from: "dialog" , msg_to: "gihan" };
+        dbo.collection("msg_table").find(query).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            db.close();
+            //res.render('clientend', { title: 'client subscribe', "messages" : result, record_no : 1});
+            res.render('ids/dialog', { title: 'dialog', "messages" : result});
+        });
+    });
+
+})
+
 module.exports = router;
