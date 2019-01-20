@@ -61,6 +61,9 @@ router.get('/', function(req, res, next) {
 
         var myobj3 = [
             {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "shehan"},
+            {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "gihan"},
+            {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "geeth"},
+            {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "hassana"},
             {"subscription_company" : "tadHack@dialog.lk", "subscription_by" : "Prabath"}
         ]
         dbo.collection("subscription_table").insertMany(myobj3, function(err, res) {
